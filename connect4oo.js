@@ -5,6 +5,7 @@ class Game{
         this.board = this.makeBoard();
         this.currPlayer = 1;
         this.makeHTMLBoard();
+        this.noClick = false;
     }
 
     //represent board as an array according to this.width and this.height
@@ -87,6 +88,7 @@ class Game{
 
     //takes in a string (msg) and displays it in a popup box
     endGame(msg) {
+        this.noClick = true;
         setTimeout(function(){alert(msg);},500);
     }
 
@@ -95,6 +97,8 @@ class Game{
     // takes in an input of the element clicked and uses its information
     // to place the piece
     handleClick(evt) {
+        if (this.noClick) return;
+        
         // get x from ID of clicked cell
         const x = +evt.target.id;
       
