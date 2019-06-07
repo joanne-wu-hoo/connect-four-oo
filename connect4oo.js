@@ -45,6 +45,14 @@ class Game{
         }
     }
 
+    deleteHTMLBoard(){
+      const boardHTML = document.getElementById('board');
+      while (boardHTML.firstChild)
+      {
+        boardHTML.removeChild(boardHTML.firstChild);
+      }
+    }
+
     findSpotForCol(x) {
         for (let y = this.height - 1; y >= 0; y--) {
           if (!this.board[y][x]) {
@@ -128,7 +136,7 @@ class Game{
           Option 3
           - Change win function to an arrow function, that way it will look at what checkForWin is considering "this" (which is the game)
           */
-         
+
           // let checkValidCoordinates = function([y,x]){
           //   return (y >= 0 && y < this.height && x >= 0 && x < this.width &&  this.board[y][x] === this.currPlayer)
           // };
@@ -154,10 +162,12 @@ class Game{
         }
       }
 
-    // reset(){
-    //     this.board = makeBoard();
-    //     //remove HTML stuff
-    // }
+    //
+    reset(){
+        this.board = this.makeBoard();
+        this.deleteHTMLBoard();
+        this.makeHTMLBoard();
+    }
 }
 
 /** Connect Four
