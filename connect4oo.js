@@ -7,6 +7,8 @@ class Game{
         this.makeHTMLBoard();
     }
 
+    //represent board as an array according to this.width and this.height
+    //returns newly made board
     makeBoard(){
         let board = [];
         for (let y = 0; y < this.height; y++) {
@@ -15,6 +17,9 @@ class Game{
         return board;
     }
 
+    //create HTML elements to show board on page
+    //also creates a column selector for players to make moves
+    //does not return anything
     makeHTMLBoard(){
         const boardHTML = document.getElementById('board');
 
@@ -45,6 +50,8 @@ class Game{
         }
     }
 
+    //deletes elements constituting the HTML board from the page
+    //nothing to return
     deleteHTMLBoard(){
       const boardHTML = document.getElementById('board');
       while (boardHTML.firstChild)
@@ -53,6 +60,9 @@ class Game{
       }
     }
 
+    // takes in x, the column selected by the player, and 
+    // finds frist valid spot on board and returns it (y)
+    // if no spot is found, the function returns null
     findSpotForCol(x) {
         for (let y = this.height - 1; y >= 0; y--) {
           if (!this.board[y][x]) {
@@ -62,6 +72,9 @@ class Game{
         return null;
     }
 
+    // shows the piece on the HTML board on the page
+    // according to inputs y (row) and x (column)
+    // returns nothing 
     placeInTable(y, x) {
         const piece = document.createElement('div');
         piece.classList.add('piece');
@@ -72,10 +85,15 @@ class Game{
         spot.append(piece);
     }
 
+    //takes in a string (msg) and displays it in a popup box
     endGame(msg) {
         setTimeout(function(){alert(msg);},500);
     }
 
+    // function to place the piece in the correct place and 
+    // check for win at each turn. Swtiches players after every turn.
+    // takes in an input of the element clicked and uses its information
+    // to place the piece
     handleClick(evt) {
         // get x from ID of clicked cell
         const x = +evt.target.id;
@@ -104,6 +122,8 @@ class Game{
         this.currPlayer = this.currPlayer === 1 ? 2 : 1;
     }
 
+    //checks if the current player has won the game
+    //returns true if there is a winner, false if there is not
     checkForWin() {
         // ** FIXED ** Bind _win to instantiated game
         let _boundWin = _win.bind(this);
@@ -162,7 +182,7 @@ class Game{
         }
       }
 
-    //
+    // resets the board to initial state
     reset(){
         this.board = this.makeBoard();
         this.deleteHTMLBoard();
