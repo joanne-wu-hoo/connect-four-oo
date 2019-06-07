@@ -2,9 +2,9 @@ class Game{
     constructor(width, height){
         this.width = width;
         this.height = height;
-        this.board = this.makeBoard();
+        // this.board = this.makeBoard();
         this.currPlayer = 1;
-        this.makeHTMLBoard();
+        // this.makeHTMLBoard();
         this.noClick = false;
     }
 
@@ -98,7 +98,7 @@ class Game{
     // to place the piece
     handleClick(evt) {
         if (this.noClick) return;
-        
+
         // get x from ID of clicked cell
         const x = +evt.target.id;
       
@@ -202,5 +202,5 @@ class Game{
  */
 
 let connectFour = new Game(7,6);
-
- 
+let start = document.getElementById('newGame');
+start.addEventListener("click", connectFour.reset.bind(connectFour));
